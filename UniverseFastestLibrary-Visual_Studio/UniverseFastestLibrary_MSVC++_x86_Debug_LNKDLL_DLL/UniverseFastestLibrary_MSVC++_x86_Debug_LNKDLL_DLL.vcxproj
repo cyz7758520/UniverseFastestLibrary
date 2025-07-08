@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{638F2A27-28D7-4167-B6AB-9911F7C9274B}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>UniverseFastestLibraryMSVCx86DebugMDdDLL</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Common.props" />
+    <Import Project="Private.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)\..\$(SolutionName)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;UNIVERSEFASTESTLIBRARYMSVCX86DEBUGMDDDLL_EXPORTS;_WINDOWS;_USRDLL;__NAME_UNIVERSEFASTESTLIBRARY__;__MS_VCXX__;__X86__;__DEBUG__;__LNKDLL__;__COMDLL__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\UniverseFastestLibrary-NDK\UniverseFastestLibraryJniLoadAndUnload.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UniverseFastestLibrary\UniverseFastestLibrary.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\UniverseFastestLibrary\MemCpy.h" />
+    <ClInclude Include="..\..\Source\UniverseFastestLibrary\MutexLock.h" />
+    <ClInclude Include="..\..\Source\UniverseFastestLibrary\UniverseFastestLibrary.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_ArmA64.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_ArmAt32.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_x64.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_x86.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_CygwinGCC_x64.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_LinuxGCC_x64.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_MSVC++_x64.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_MSVC++_x86.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_AndroidGCC_ArmA64.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_AndroidGCC_ArmAt32.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_AndroidGCC_x64.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_AndroidGCC_x86.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_CygwinGCC_x64.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_LinuxGCC_x64.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_AndroidGCC_ArmA64.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_AndroidGCC_ArmAt32.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_AndroidGCC_x64.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_AndroidGCC_x86.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_CygwinGCC_x64.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_LinuxGCC_x64.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="..\..\Source\UniverseFastestLibrary\MemCpy_MSVC++_x64.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </MASM>
+    <MASM Include="..\..\Source\UniverseFastestLibrary\MemCpy_MSVC++_x86.asm" />
+    <MASM Include="..\..\Source\UniverseFastestLibrary\MutexLock_MSVC++_x64.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </MASM>
+    <MASM Include="..\..\Source\UniverseFastestLibrary\MutexLock_MSVC++_x86.asm" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  </ImportGroup>
+</Project>

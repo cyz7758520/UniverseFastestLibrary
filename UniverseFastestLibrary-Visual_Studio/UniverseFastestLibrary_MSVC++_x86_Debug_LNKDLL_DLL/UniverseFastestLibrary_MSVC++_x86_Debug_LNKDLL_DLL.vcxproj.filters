@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="NDK">
+      <UniqueIdentifier>{3f92e6ad-4968-4f65-bf80-9b726c4c7af7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\UniverseFastestLibrary-NDK\UniverseFastestLibraryJniLoadAndUnload.cpp">
+      <Filter>NDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UniverseFastestLibrary\UniverseFastestLibrary.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\UniverseFastestLibrary\UniverseFastestLibrary.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UniverseFastestLibrary\MutexLock.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UniverseFastestLibrary\MemCpy.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_AndroidGCC_ArmA64.s">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_AndroidGCC_ArmAt32.s">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_AndroidGCC_x64.s">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_AndroidGCC_x86.s">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_CygwinGCC_x64.s">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_LinuxGCC_x64.s">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_AndroidGCC_ArmA64.s">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_AndroidGCC_ArmAt32.s">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_AndroidGCC_x64.s">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_AndroidGCC_x86.s">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_CygwinGCC_x64.s">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_LinuxGCC_x64.s">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_ArmA64.inc">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_ArmAt32.inc">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_x64.inc">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_x86.inc">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_CygwinGCC_x64.inc">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_LinuxGCC_x64.inc">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_MSVC++_x64.inc">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_MSVC++_x86.inc">
+      <Filter>头文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="..\..\Source\UniverseFastestLibrary\MemCpy_MSVC++_x64.asm">
+      <Filter>源文件</Filter>
+    </MASM>
+    <MASM Include="..\..\Source\UniverseFastestLibrary\MemCpy_MSVC++_x86.asm">
+      <Filter>源文件</Filter>
+    </MASM>
+    <MASM Include="..\..\Source\UniverseFastestLibrary\MutexLock_MSVC++_x64.asm">
+      <Filter>源文件</Filter>
+    </MASM>
+    <MASM Include="..\..\Source\UniverseFastestLibrary\MutexLock_MSVC++_x86.asm">
+      <Filter>源文件</Filter>
+    </MASM>
+  </ItemGroup>
+</Project>
