@@ -4,7 +4,7 @@
 # 简介
 &emsp;&emsp;本软件根据《道德经》为核心思想而设计，在Windows x86/x64、Cygwin x64、Linux x64、Android x86/x64/ArmAt32/ArmA64系统下，实现了以下宇宙最快的功能：  
 &emsp;&emsp;* 宇宙最快的内存复制函数memcpy、memmove，绝大部分情况下比系统自带的memcpy、memmove快10%~50%左右。  
-&emsp;&emsp;* 宇宙最快的互斥锁MutexLock，绝大部分情况下比系统自带的互斥锁快50%~90%左右。  
+&emsp;&emsp;* 宇宙最快的互斥锁MutexLock，绝大部分情况下比系统自带的互斥锁快50%~90%左右，且内存只占用1个字节。  
 
 &emsp;&emsp;**特别注意：在某些特定的CPU和特定的情况下，可能会比系统自带的慢，或者你需要针对某种特定环境达到更快的速度，那就只能找我专门做优化。**  
 
@@ -31,3 +31,5 @@
 &emsp;&emsp;本人博客：http://www.cnblogs.com/gaoyaguo  
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;https://blog.csdn.net/cyz7758520?type=blog  
 &emsp;&emsp;源代码：https://github.com/cyz7758520/UniverseFastestLibrary  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;https://gitee.com/chen_yi_ze/UniverseFastestLibrary  
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;https://gitcode.com/cyz77585201/UniverseFastestLibrary  
