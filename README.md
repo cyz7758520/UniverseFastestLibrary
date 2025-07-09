@@ -2,7 +2,7 @@
 # 必读说明
 
 # 简介
-&emsp;&emsp;本软件根据《道德经》为核心思想而设计，在Windows x86/x64、Cygwin x64、Linux x64、Android x86/x64/ArmAt32/ArmA64系统下，实现了以下宇宙最快的功能：  
+&emsp;&emsp;本软件根据《道德经》为核心思想而设计，完全自主研发，使用大量汇编指令深度优化，在Windows x86/x64、Cygwin x64、Linux x64、Android x86/x64/ArmAt32/ArmA64系统下，实现了以下宇宙最快的功能：  
 &emsp;&emsp;* 宇宙最快的内存复制函数memcpy、memmove，绝大部分情况下比系统自带的memcpy、memmove快10%~50%左右。  
 &emsp;&emsp;* 宇宙最快的互斥锁MutexLock，绝大部分情况下比系统自带的互斥锁快50%~90%左右，且内存只占用1个字节。  
 
@@ -24,7 +24,6 @@
 &emsp;&emsp;6、互斥锁解锁：MutexUnlock( &g_MutexLock );。  
 
 # 其他
-&emsp;&emsp;本软件完全自主研发。  
 &emsp;&emsp;讨论QQ群：511046632    欢迎大家参与测试和讨论！  
 &emsp;&emsp;本人QQ号：280604597    赤勇玄心行天道  
 &emsp;&emsp;本人微信：qq280604597    赤勇玄心行天道  
@@ -33,3 +32,7 @@
 &emsp;&emsp;源代码：https://github.com/cyz7758520/UniverseFastestLibrary  
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;https://gitee.com/chen_yi_ze/UniverseFastestLibrary  
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;https://gitcode.com/cyz77585201/UniverseFastestLibrary  
+
+# 捐助
+&emsp;&emsp;如果大家觉得好的话，我希望大家能支持我继续研发！  
+&emsp;&emsp;![Image text](https://img2023.cnblogs.com/blog/249784/202310/249784-20231019225223266-1469706300.png)
