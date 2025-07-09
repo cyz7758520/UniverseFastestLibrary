@@ -35,4 +35,4 @@
 
 # 捐助
 &emsp;&emsp;如果大家觉得好的话，我希望大家能支持我继续研发！  
-&emsp;&emsp;![Image text](https://img2023.cnblogs.com/blog/249784/202310/249784-20231019225223266-1469706300.png)
+&emsp;&emsp;![支付宝微信QQ收款二维码](%E6%94%AF%E4%BB%98%E5%AE%9D%E5%BE%AE%E4%BF%A1QQ%E6%94%B6%E6%AC%BE%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
