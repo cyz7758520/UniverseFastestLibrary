@@ -82,6 +82,14 @@
     </MASM>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_ArmA64.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_ArmAt32.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_x64.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_x86.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_CygwinGCC_x64.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_LinuxGCC_x64.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_MSVC++_x64.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_MSVC++_x86.inc" />
     <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_AndroidGCC_ArmA64.s">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>

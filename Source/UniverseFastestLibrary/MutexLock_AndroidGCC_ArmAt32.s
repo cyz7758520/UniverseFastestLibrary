@@ -4,47 +4,47 @@
 .text
 
 
-	.align		6											//64×Ö½Ú¶ÔÆë¡£
+	.align		6											//64å­—èŠ‚å¯¹é½ã€‚
 .global MutexLocked
 MutexLocked:
 
-	mov			r2, 1										//ÉèÖÃr2Îª1¡£
+	mov			r2, 1										//è®¾ç½®r2ä¸º1ã€‚
 
-	ldrexb		r1, [ r0 ]									//°Ñ»¥³âËøµÄÖµÁãÖµÀ©Õ¹¶ÁÈ¡µ½r1¡£
-	teq			r1, 0										//ÅÐ¶Ïr1ÊÇ·ñµÈÓÚ0¡£
-	bne			Yield										//Èç¹ûr1²»µÈÓÚ0£¬¾ÍÌø×ªµ½Yield¡£
-	strexb		r1, r2, [ r0 ]								//ÉèÖÃ»¥³âËøÎªr2µÄ1£¬²¢´æ·ÅÊÇ·ñ³É¹¦µ½r1¡£
-	teq			r1, 0										//ÅÐ¶Ïr1ÊÇ·ñµÈÓÚ0¡£
-	beq			MutexLockedOut								//Èç¹ûr1µÈÓÚ0£¬¾Í±íÊ¾³É¹¦£¬Ìø×ªµ½MutexLockedOut¡£
+	ldrexb		r1, [ r0 ]									//æŠŠäº’æ–¥é”çš„å€¼é›¶å€¼æ‰©å±•è¯»å–åˆ°r1ã€‚
+	teq			r1, 0										//åˆ¤æ–­r1æ˜¯å¦ç­‰äºŽ0ã€‚
+	bne			Yield										//å¦‚æžœr1ä¸ç­‰äºŽ0ï¼Œå°±è·³è½¬åˆ°Yieldã€‚
+	strexb		r1, r2, [ r0 ]								//è®¾ç½®äº’æ–¥é”ä¸ºr2çš„1ï¼Œå¹¶å­˜æ”¾æ˜¯å¦æˆåŠŸåˆ°r1ã€‚
+	teq			r1, 0										//åˆ¤æ–­r1æ˜¯å¦ç­‰äºŽ0ã€‚
+	beq			MutexLockedOut								//å¦‚æžœr1ç­‰äºŽ0ï¼Œå°±è¡¨ç¤ºæˆåŠŸï¼Œè·³è½¬åˆ°MutexLockedOutã€‚
 
 	Yield:
-	mov			r3, r0										//°Ñ»¥³âËøµÄµØÖ·r0¸´ÖÆµ½r3¡£
-	mov			r12, r7										//°Ñr7±¸·Ýµ½r12¡£
-	mov			r7, 0x9E									//ÉèÖÃr7Îª0x9E¡£
+	mov			r3, r0										//æŠŠäº’æ–¥é”çš„åœ°å€r0å¤åˆ¶åˆ°r3ã€‚
+	mov			r12, r7										//æŠŠr7å¤‡ä»½åˆ°r12ã€‚
+	mov			r7, 0x9E									//è®¾ç½®r7ä¸º0x9Eã€‚
 
 	ReTry:
-	svc			0											//µ÷ÓÃsched_yieldº¯Êý£¬¸Ãº¯Êý»áÉèÖÃr0Îª0¡£Êµ²â±ÈÑ­»·Ö´ÐÐyieldÖ¸ÁîÒª¿ì¡£
+	svc			0											//è°ƒç”¨sched_yieldå‡½æ•°ï¼Œè¯¥å‡½æ•°ä¼šè®¾ç½®r0ä¸º0ã€‚å®žæµ‹æ¯”å¾ªçŽ¯æ‰§è¡ŒyieldæŒ‡ä»¤è¦å¿«ã€‚
 
-	ldrexb		r1, [ r3 ]									//°Ñ»¥³âËøµÄÖµÁãÖµÀ©Õ¹¶ÁÈ¡µ½r1¡£
-	teq			r1, 0										//ÅÐ¶Ïr1ÊÇ·ñµÈÓÚ0¡£
-	bne			ReTry										//Èç¹ûr1²»µÈÓÚ0£¬¾ÍÌø×ªµ½ReTry¡£
-	strexb		r1, r2, [ r3 ]								//ÉèÖÃ»¥³âËøÎªr2µÄ1£¬²¢´æ·ÅÊÇ·ñ³É¹¦µ½r1¡£
-	teq			r1, 0										//ÅÐ¶Ïr1ÊÇ·ñµÈÓÚ0¡£
-	bne			ReTry										//Èç¹ûr1²»µÈÓÚ0£¬¾Í±íÊ¾Ê§°Ü£¬Ìø×ªµ½ReTry¡£
+	ldrexb		r1, [ r3 ]									//æŠŠäº’æ–¥é”çš„å€¼é›¶å€¼æ‰©å±•è¯»å–åˆ°r1ã€‚
+	teq			r1, 0										//åˆ¤æ–­r1æ˜¯å¦ç­‰äºŽ0ã€‚
+	bne			ReTry										//å¦‚æžœr1ä¸ç­‰äºŽ0ï¼Œå°±è·³è½¬åˆ°ReTryã€‚
+	strexb		r1, r2, [ r3 ]								//è®¾ç½®äº’æ–¥é”ä¸ºr2çš„1ï¼Œå¹¶å­˜æ”¾æ˜¯å¦æˆåŠŸåˆ°r1ã€‚
+	teq			r1, 0										//åˆ¤æ–­r1æ˜¯å¦ç­‰äºŽ0ã€‚
+	bne			ReTry										//å¦‚æžœr1ä¸ç­‰äºŽ0ï¼Œå°±è¡¨ç¤ºå¤±è´¥ï¼Œè·³è½¬åˆ°ReTryã€‚
 
-	mov			r7, r12										//»Ö¸´r7Îªr12¡£
+	mov			r7, r12										//æ¢å¤r7ä¸ºr12ã€‚
 
 	MutexLockedOut:
 	bx			lr
 
 
-	.align		6											//64×Ö½Ú¶ÔÆë¡£
+	.align		5											//32å­—èŠ‚å¯¹é½ã€‚å› ä¸ºåŽç»­5ä¸ªæŒ‡ä»¤åªæœ‰20ä¸ªå­—èŠ‚ã€‚
 .global MutexUnlock
 MutexUnlock:
     
-	mov			r1, 0										//ÉèÖÃr1Îª0¡£
-	dmb			ish											//ÉèÖÃÄÚ´æÆÁÕÏ¡£
-	strb		r1, [ r0 ]									//ÉèÖÃr0Îªr1µÄ0¡£
-	dmb			ish											//ÉèÖÃÄÚ´æÆÁÕÏ¡£
+	mov			r1, 0										//è®¾ç½®r1ä¸º0ã€‚
+	dmb			ish											//è®¾ç½®å†…å­˜å±éšœã€‚
+	strb		r1, [ r0 ]									//è®¾ç½®r0ä¸ºr1çš„0ã€‚
+	dmb			ish											//è®¾ç½®å†…å­˜å±éšœã€‚
 
 	bx			lr

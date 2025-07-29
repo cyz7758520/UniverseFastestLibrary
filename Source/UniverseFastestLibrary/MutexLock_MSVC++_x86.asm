@@ -1,45 +1,47 @@
 include AsmInc_MSVC++_x86.inc
 
 
-.code
+_code segment read execute shared align( 64 ) 'code'
 
 
-	align		16
+	align		64							; 64å­—èŠ‚å¯¹é½ã€‚
 public MutexLocked
 MutexLocked:
 
-	mov         ecx, dword ptr [ esp + 4 ]	; ÉèÖÃecxÎª»¥³âËøµÄµØÖ·¡£
+	mov         ecx, dword ptr [ esp + 4 ]	; è®¾ç½®ecxä¸ºäº’æ–¥é”çš„åœ°å€ã€‚
 
-	mov         al, 1						; ÉèÖÃalÎª1¡£
-	xchg        al, byte ptr [ ecx ]		; Ô­×Ó½»»»alºÍ»¥³âËøµÄÖµ¡£
-	test        al, al						; ÅĞ¶ÏalÊÇ·ñÎª0¡£
-	je          MutexLockedOut				; Èç¹ûalÎª0£¬¾Í±íÊ¾³É¹¦£¬Ìø×ªµ½MutexLockedOut¡£
+	mov         al, 1						; è®¾ç½®alä¸º1ã€‚
+	xchg        al, byte ptr [ ecx ]		; åŸå­äº¤æ¢alå’Œäº’æ–¥é”çš„å€¼ã€‚
+	test        al, al						; åˆ¤æ–­alæ˜¯å¦ä¸º0ã€‚
+	je          MutexLockedOut				; å¦‚æœalä¸º0ï¼Œå°±è¡¨ç¤ºæˆåŠŸï¼Œè·³è½¬åˆ°MutexLockedOutã€‚
 
 	ReTry:
-	mov			eax, 100					; ÉèÖÃÑ­»·100´Î¡£
+	mov			eax, 100					; è®¾ç½®å¾ªç¯100æ¬¡ã€‚
 	LoopPause:
-	pause									; Ïß³ÌĞİÃß¡£
-	dec			eax							; ÉèÖÃeaxÎªeax-1¡£
-	jne			LoopPause					; Èç¹ûeax²»Îª0£¬¾ÍÌø×ªµ½LoopPause¡£
+	pause									; çº¿ç¨‹ä¼‘çœ ã€‚
+	dec			eax							; è®¾ç½®eaxä¸ºeax-1ã€‚
+	jne			LoopPause					; å¦‚æœeaxä¸ä¸º0ï¼Œå°±è·³è½¬åˆ°LoopPauseã€‚
 
-	mov         al, 1						; ÉèÖÃalÎª1¡£
-	xchg        al, byte ptr [ ecx ]		; Ô­×Ó½»»»alºÍ»¥³âËøµÄÖµ¡£
-	test        al, al						; ÅĞ¶ÏalÊÇ·ñÎª0¡£
-	jne         ReTry						; Èç¹ûal²»Îª0£¬¾Í±íÊ¾Ê§°Ü£¬Ìø×ªµ½ReTry¡£
+	mov         al, 1						; è®¾ç½®alä¸º1ã€‚
+	xchg        al, byte ptr [ ecx ]		; åŸå­äº¤æ¢alå’Œäº’æ–¥é”çš„å€¼ã€‚
+	test        al, al						; åˆ¤æ–­alæ˜¯å¦ä¸º0ã€‚
+	jne         ReTry						; å¦‚æœalä¸ä¸º0ï¼Œå°±è¡¨ç¤ºå¤±è´¥ï¼Œè·³è½¬åˆ°ReTryã€‚
 
 	MutexLockedOut:
 	ret
 
 
-	align		16
+	align		8							; 8å­—èŠ‚å¯¹é½ã€‚å› ä¸ºåç»­3ä¸ªæŒ‡ä»¤åªæœ‰8ä¸ªå­—èŠ‚ã€‚
 public MutexUnlock
 MutexUnlock:
 
-	mov			ecx, dword ptr [ esp + 4 ]	; ÉèÖÃecxÎª»¥³âËøµÄµØÖ·¡£
+	mov			ecx, dword ptr [ esp + 4 ]	; è®¾ç½®ecxä¸ºäº’æ–¥é”çš„åœ°å€ã€‚
 
-	mov			byte ptr [ ecx ], 0			; ÉèÖÃ»¥³âËøµÄÖµÎª0¡£
+	mov			byte ptr [ ecx ], 0			; è®¾ç½®äº’æ–¥é”çš„å€¼ä¸º0ã€‚
 
 	ret
+
+_code ends
 
 
 end

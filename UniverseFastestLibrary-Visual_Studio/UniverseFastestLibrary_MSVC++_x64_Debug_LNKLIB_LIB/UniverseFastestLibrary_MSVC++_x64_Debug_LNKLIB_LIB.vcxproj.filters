@@ -81,5 +81,29 @@
     <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_LinuxGCC_x64.s">
       <Filter>源文件</Filter>
     </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_ArmA64.inc">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_ArmAt32.inc">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_x64.inc">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_x86.inc">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_CygwinGCC_x64.inc">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_LinuxGCC_x64.inc">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_MSVC++_x64.inc">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_MSVC++_x86.inc">
+      <Filter>头文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
