@@ -1,6 +1,6 @@
 .intel_syntax noprefix
 
-.macro GetGotPt GotPtReg							# 获取全局偏移表的地址。
+.macro GetGotPt GotPtReg									# 获取全局偏移表的地址。
 
 	call		GetGotPopBefore\@
 	GetGotPopBefore\@:
@@ -12,7 +12,7 @@
 
 .endm
 
-.macro TabJmp TabName, Offset, GotPtReg, TmpReg		# 跳转表的跳转。
+.macro TabJmp TabName, Offset, GotPtReg, TmpReg				# 跳转表的跳转。
 
 	mov			\TmpReg, dword ptr [ \GotPtReg + \TabName@GOTOFF + \Offset * 4 ]
 	add			\TmpReg, \GotPtReg

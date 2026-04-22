@@ -35,6 +35,6 @@ MutexLocked:
 .global MutexUnlock
 MutexUnlock:
 
-	stlr		wzr, [ x0 ]									//设置互斥锁的值为0。
+	stlrb		wzr, [ x0 ]									//设置互斥锁的值为0。
 
 	ret

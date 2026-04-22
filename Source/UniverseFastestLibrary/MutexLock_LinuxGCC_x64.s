@@ -12,7 +12,7 @@ MutexLocked:
 	xchg        al, byte ptr [ rdi ]		# 原子交换al和互斥锁的值。
 	test        al, al						# 判断al是否为0。
 	je          MutexLockedOut				# 如果al为0，就表示成功，跳转到MutexLockedOut。
-	
+
 	ReTry:
 	mov			rax, 100					# 设置循环100次。
 	LoopPause:

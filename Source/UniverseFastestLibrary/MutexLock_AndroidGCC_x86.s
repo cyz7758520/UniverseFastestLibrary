@@ -35,7 +35,7 @@ MutexLocked:
 .global MutexUnlock
 MutexUnlock:
 
-    mov			ecx, dword ptr [ esp + 4 ]	# 设置ecx为互斥锁的地址。
+	mov			ecx, dword ptr [ esp + 4 ]	# 设置ecx为互斥锁的地址。
 
 	mov			byte ptr [ ecx ], 0			# 设置互斥锁的值为0。
 

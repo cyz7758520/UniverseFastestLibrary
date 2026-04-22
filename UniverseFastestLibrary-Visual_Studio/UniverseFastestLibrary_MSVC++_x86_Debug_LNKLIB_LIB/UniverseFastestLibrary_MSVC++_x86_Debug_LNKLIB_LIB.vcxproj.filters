@@ -13,8 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="NDK">
+    <Filter Include="AndroidNDK">
       <UniqueIdentifier>{8c5ba47b-50f0-493a-9f85-7758ff5e41f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HarmonyNDK">
+      <UniqueIdentifier>{76e4c9a7-bbaf-4d6d-87fe-a20f44abf3af}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -29,11 +32,14 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\UniverseFastestLibrary-NDK\UniverseFastestLibraryJniLoadAndUnload.cpp">
-      <Filter>NDK</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\UniverseFastestLibrary\UniverseFastestLibrary.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UniverseFastestLibrary-HarmonyNDK\UniverseFastestLibraryNapiModuleRegister.cpp">
+      <Filter>HarmonyNDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UniverseFastestLibrary-AndroidNDK\UniverseFastestLibraryJniLoadAndUnload.cpp">
+      <Filter>AndroidNDK</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +101,24 @@
       <Filter>源文件</Filter>
     </None>
     <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_LinuxGCC_x64.s">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_HarmonyNDK_x64.inc">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_HarmonyNDK_ArmA64.inc">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_HarmonyNDK_ArmA64.s">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_HarmonyNDK_x64.s">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_HarmonyNDK_ArmA64.s">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_HarmonyNDK_x64.s">
       <Filter>源文件</Filter>
     </None>
   </ItemGroup>

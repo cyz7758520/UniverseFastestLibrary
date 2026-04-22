@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
-make clean
+./q清理.sh
 ./b编译.sh

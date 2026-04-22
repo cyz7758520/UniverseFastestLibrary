@@ -83,9 +83,9 @@ MemCpy:
 	prfm		#0, [ x1 ]
 	mov			/*DstPt*/x18, x0							//设置返回值x0为目的地址。
 
-	lsr			x3, /*SzByt*/x2, #7							//设置x3为/*SzByt*/x2无符号逻辑右移7位。这里用lsr而不用cmp，因为lsr比cmp快。
-	cbz			x3, MemCpyNeonSUDUTabJmp					//如果x3为0，就表示/*SzByt*/x2无符号小于128字节，不需要进行目的地址32字节对齐，进行Neon指令的源始地址未对齐目的地址未对齐复制，因为小于128字节做目的地址32字节对齐反而慢些，大于等于128字节做目的地址32字节对齐才会快些，且如果一批大于192字节要入栈了。
-															//如果x3不为0，就表示/*SzByt*/x2无符号大于等于128字节，就需要进行目的地址32字节对齐。
+	lsr			x3, /*SzByt*/x2, #8							//设置x3为/*SzByt*/x2无符号逻辑右移8位。这里用lsr而不用cmp，因为lsr比cmp快。
+	cbz			x3, MemCpyNeonSUDUTabJmp					//如果x3为0，就表示/*SzByt*/x2无符号小于256字节，不需要进行目的地址32字节对齐，进行Neon指令的源始地址未对齐目的地址未对齐复制，因为小于256字节做目的地址32字节对齐反而慢些，大于等于256字节做目的地址32字节对齐才会快些，且如果一批大于384字节要入栈了。
+															//如果x3不为0，就表示/*SzByt*/x2无符号大于等于256字节，就需要进行目的地址32字节对齐。
 
 	subs		x3, /*DstPt*/x18, /*SrcPt*/x1				//设置x3为/*DstPt*/x18-/*SrcPt*/x1，也就是目的地址-源始地址。
 	b.ne		DstPtNeSrcPt								//如果/*DstPt*/x18-/*SrcPt*/x1不等于0，就表示目的地址与源始地址不相同。
@@ -77288,7 +77288,135 @@ MemCpy:
 	.long		MemCpyNeonSUDU125 - MemCpyNeonSUDUTab
 	.long		MemCpyNeonSUDU126 - MemCpyNeonSUDUTab
 	.long		MemCpyNeonSUDU127 - MemCpyNeonSUDUTab
-	.align		2											//4字节对齐。
+	.long		MemCpyNeonSUDU128 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU129 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU130 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU131 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU132 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU133 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU134 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU135 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU136 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU137 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU138 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU139 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU140 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU141 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU142 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU143 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU144 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU145 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU146 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU147 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU148 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU149 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU150 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU151 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU152 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU153 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU154 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU155 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU156 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU157 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU158 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU159 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU160 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU161 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU162 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU163 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU164 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU165 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU166 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU167 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU168 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU169 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU170 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU171 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU172 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU173 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU174 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU175 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU176 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU177 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU178 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU179 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU180 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU181 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU182 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU183 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU184 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU185 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU186 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU187 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU188 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU189 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU190 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU191 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU192 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU193 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU194 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU195 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU196 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU197 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU198 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU199 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU200 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU201 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU202 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU203 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU204 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU205 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU206 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU207 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU208 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU209 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU210 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU211 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU212 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU213 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU214 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU215 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU216 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU217 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU218 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU219 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU220 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU221 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU222 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU223 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU224 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU225 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU226 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU227 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU228 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU229 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU230 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU231 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU232 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU233 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU234 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU235 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU236 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU237 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU238 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU239 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU240 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU241 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU242 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU243 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU244 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU245 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU246 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU247 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU248 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU249 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU250 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU251 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU252 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU253 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU254 - MemCpyNeonSUDUTab
+	.long		MemCpyNeonSUDU255 - MemCpyNeonSUDUTab
+	.align		2
 	MemCpyNeonSUDU0:
 	ret
 	MemCpyNeonSUDU1:
@@ -77991,11 +78119,11 @@ MemCpy:
 	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
 	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
 	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
-	ld3			{ v6.b-v8.b }[ 0 ], [ /*SrcPt*/x1 ]
+	ld3			{ v16.b-v18.b }[ 0 ], [ /*SrcPt*/x1 ]
 	stp			q0, q1, [ /*DstPt*/x18 ], #32
 	stp			q2, q3, [ /*DstPt*/x18 ], #32
 	stp			q4, q5, [ /*DstPt*/x18 ], #32
-	st3			{ v6.b-v8.b }[ 0 ], [ /*DstPt*/x18 ]
+	st3			{ v16.b-v18.b }[ 0 ], [ /*DstPt*/x18 ]
 	ret
 	MemCpyNeonSUDU100:
 	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
@@ -78021,11 +78149,11 @@ MemCpy:
 	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
 	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
 	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
-	ld3			{ v6.h-v8.h }[ 0 ], [ /*SrcPt*/x1 ]
+	ld3			{ v16.h-v18.h }[ 0 ], [ /*SrcPt*/x1 ]
 	stp			q0, q1, [ /*DstPt*/x18 ], #32
 	stp			q2, q3, [ /*DstPt*/x18 ], #32
 	stp			q4, q5, [ /*DstPt*/x18 ], #32
-	st3			{ v6.h-v8.h }[ 0 ], [ /*DstPt*/x18 ]
+	st3			{ v16.h-v18.h }[ 0 ], [ /*DstPt*/x18 ]
 	ret
 	MemCpyNeonSUDU103:
 	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
@@ -78081,11 +78209,11 @@ MemCpy:
 	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
 	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
 	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
-	ld3			{ v6.s-v8.s }[ 0 ], [ /*SrcPt*/x1 ]
+	ld3			{ v16.s-v18.s }[ 0 ], [ /*SrcPt*/x1 ]
 	stp			q0, q1, [ /*DstPt*/x18 ], #32
 	stp			q2, q3, [ /*DstPt*/x18 ], #32
 	stp			q4, q5, [ /*DstPt*/x18 ], #32
-	st3			{ v6.s-v8.s }[ 0 ], [ /*DstPt*/x18 ]
+	st3			{ v16.s-v18.s }[ 0 ], [ /*DstPt*/x18 ]
 	ret
 	MemCpyNeonSUDU109:
 	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
@@ -78132,94 +78260,94 @@ MemCpy:
 	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
 	ldp			q4, q5, [ /*SrcPt*/x1 ]
 	add			/*SrcPt*/x1, /*SrcPt*/x1, #25
-	ld1			{ v6.1d-v8.1d }, [ /*SrcPt*/x1 ]
+	ld1			{ v16.1d-v18.1d }, [ /*SrcPt*/x1 ]
 	stp			q0, q1, [ /*DstPt*/x18 ], #32
 	stp			q2, q3, [ /*DstPt*/x18 ], #32
 	stp			q4, q5, [ /*DstPt*/x18 ]
 	add			/*DstPt*/x18, /*DstPt*/x18, #25
-	st1			{ v6.1d-v8.1d }, [ /*DstPt*/x18 ]
+	st1			{ v16.1d-v18.1d }, [ /*DstPt*/x18 ]
 	ret
 	MemCpyNeonSUDU114:
 	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
 	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
 	ldp			q4, q5, [ /*SrcPt*/x1 ]
 	add			/*SrcPt*/x1, /*SrcPt*/x1, #26
-	ld1			{ v6.1d-v8.1d }, [ /*SrcPt*/x1 ]
+	ld1			{ v16.1d-v18.1d }, [ /*SrcPt*/x1 ]
 	stp			q0, q1, [ /*DstPt*/x18 ], #32
 	stp			q2, q3, [ /*DstPt*/x18 ], #32
 	stp			q4, q5, [ /*DstPt*/x18 ]
 	add			/*DstPt*/x18, /*DstPt*/x18, #26
-	st1			{ v6.1d-v8.1d }, [ /*DstPt*/x18 ]
+	st1			{ v16.1d-v18.1d }, [ /*DstPt*/x18 ]
 	ret
 	MemCpyNeonSUDU115:
 	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
 	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
 	ldp			q4, q5, [ /*SrcPt*/x1 ]
 	add			/*SrcPt*/x1, /*SrcPt*/x1, #27
-	ld1			{ v6.1d-v8.1d }, [ /*SrcPt*/x1 ]
+	ld1			{ v16.1d-v18.1d }, [ /*SrcPt*/x1 ]
 	stp			q0, q1, [ /*DstPt*/x18 ], #32
 	stp			q2, q3, [ /*DstPt*/x18 ], #32
 	stp			q4, q5, [ /*DstPt*/x18 ]
 	add			/*DstPt*/x18, /*DstPt*/x18, #27
-	st1			{ v6.1d-v8.1d }, [ /*DstPt*/x18 ]
+	st1			{ v16.1d-v18.1d }, [ /*DstPt*/x18 ]
 	ret
 	MemCpyNeonSUDU116:
 	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
 	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
 	ldp			q4, q5, [ /*SrcPt*/x1 ]
 	add			/*SrcPt*/x1, /*SrcPt*/x1, #28
-	ld1			{ v6.1d-v8.1d }, [ /*SrcPt*/x1 ]
+	ld1			{ v16.1d-v18.1d }, [ /*SrcPt*/x1 ]
 	stp			q0, q1, [ /*DstPt*/x18 ], #32
 	stp			q2, q3, [ /*DstPt*/x18 ], #32
 	stp			q4, q5, [ /*DstPt*/x18 ]
 	add			/*DstPt*/x18, /*DstPt*/x18, #28
-	st1			{ v6.1d-v8.1d }, [ /*DstPt*/x18 ]
+	st1			{ v16.1d-v18.1d }, [ /*DstPt*/x18 ]
 	ret
 	MemCpyNeonSUDU117:
 	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
 	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
 	ldp			q4, q5, [ /*SrcPt*/x1 ]
 	add			/*SrcPt*/x1, /*SrcPt*/x1, #29
-	ld1			{ v6.1d-v8.1d }, [ /*SrcPt*/x1 ]
+	ld1			{ v16.1d-v18.1d }, [ /*SrcPt*/x1 ]
 	stp			q0, q1, [ /*DstPt*/x18 ], #32
 	stp			q2, q3, [ /*DstPt*/x18 ], #32
 	stp			q4, q5, [ /*DstPt*/x18 ]
 	add			/*DstPt*/x18, /*DstPt*/x18, #29
-	st1			{ v6.1d-v8.1d }, [ /*DstPt*/x18 ]
+	st1			{ v16.1d-v18.1d }, [ /*DstPt*/x18 ]
 	ret
 	MemCpyNeonSUDU118:
 	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
 	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
 	ldp			q4, q5, [ /*SrcPt*/x1 ]
 	add			/*SrcPt*/x1, /*SrcPt*/x1, #30
-	ld1			{ v6.1d-v8.1d }, [ /*SrcPt*/x1 ]
+	ld1			{ v16.1d-v18.1d }, [ /*SrcPt*/x1 ]
 	stp			q0, q1, [ /*DstPt*/x18 ], #32
 	stp			q2, q3, [ /*DstPt*/x18 ], #32
 	stp			q4, q5, [ /*DstPt*/x18 ]
 	add			/*DstPt*/x18, /*DstPt*/x18, #30
-	st1			{ v6.1d-v8.1d }, [ /*DstPt*/x18 ]
+	st1			{ v16.1d-v18.1d }, [ /*DstPt*/x18 ]
 	ret
 	MemCpyNeonSUDU119:
 	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
 	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
 	ldp			q4, q5, [ /*SrcPt*/x1 ]
 	add			/*SrcPt*/x1, /*SrcPt*/x1, #31
-	ld1			{ v6.1d-v8.1d }, [ /*SrcPt*/x1 ]
+	ld1			{ v16.1d-v18.1d }, [ /*SrcPt*/x1 ]
 	stp			q0, q1, [ /*DstPt*/x18 ], #32
 	stp			q2, q3, [ /*DstPt*/x18 ], #32
 	stp			q4, q5, [ /*DstPt*/x18 ]
 	add			/*DstPt*/x18, /*DstPt*/x18, #31
-	st1			{ v6.1d-v8.1d }, [ /*DstPt*/x18 ]
+	st1			{ v16.1d-v18.1d }, [ /*DstPt*/x18 ]
 	ret
 	MemCpyNeonSUDU120:
 	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
 	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
 	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
-	ld1			{ v6.1d-v8.1d }, [ /*SrcPt*/x1 ]
+	ld1			{ v16.1d-v18.1d }, [ /*SrcPt*/x1 ]
 	stp			q0, q1, [ /*DstPt*/x18 ], #32
 	stp			q2, q3, [ /*DstPt*/x18 ], #32
 	stp			q4, q5, [ /*DstPt*/x18 ], #32
-	st1			{ v6.1d-v8.1d }, [ /*DstPt*/x18 ]
+	st1			{ v16.1d-v18.1d }, [ /*DstPt*/x18 ]
 	ret
 	MemCpyNeonSUDU121:
 	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
@@ -78304,4 +78432,2028 @@ MemCpy:
 	stp			q4, q5, [ /*DstPt*/x18 ]
 	add			/*DstPt*/x18, /*DstPt*/x18, #31
 	stp			q6, q7, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU128:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU129:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldr			b16, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	str			b16, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU130:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldr			h16, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	str			h16, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU131:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ld3			{ v16.b-v18.b }[ 0 ], [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	st3			{ v16.b-v18.b }[ 0 ], [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU132:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldr			s16, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	str			s16, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU133:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	ldr			d16, [ /*SrcPt*/x1, #29 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	str			d16, [ /*DstPt*/x18, #29 ]
+	ret
+	MemCpyNeonSUDU134:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ld3			{ v16.h-v18.h }[ 0 ], [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	st3			{ v16.h-v18.h }[ 0 ], [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU135:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	ldr			d16, [ /*SrcPt*/x1, #31 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	str			d16, [ /*DstPt*/x18, #31 ]
+	ret
+	MemCpyNeonSUDU136:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldr			d16, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	str			d16, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU137:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	ldr			q16, [ /*SrcPt*/x1, #25 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	str			q16, [ /*DstPt*/x18, #25 ]
+	ret
+	MemCpyNeonSUDU138:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	ldr			q16, [ /*SrcPt*/x1, #26 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	str			q16, [ /*DstPt*/x18, #26 ]
+	ret
+	MemCpyNeonSUDU139:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	ldr			q16, [ /*SrcPt*/x1, #27 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	str			q16, [ /*DstPt*/x18, #27 ]
+	ret
+	MemCpyNeonSUDU140:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ld3			{ v16.s-v18.s }[ 0 ], [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	st3			{ v16.s-v18.s }[ 0 ], [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU141:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	ldr			q16, [ /*SrcPt*/x1, #29 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	str			q16, [ /*DstPt*/x18, #29 ]
+	ret
+	MemCpyNeonSUDU142:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	ldr			q16, [ /*SrcPt*/x1, #30 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	str			q16, [ /*DstPt*/x18, #30 ]
+	ret
+	MemCpyNeonSUDU143:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	ldr			q16, [ /*SrcPt*/x1, #31 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	str			q16, [ /*DstPt*/x18, #31 ]
+	ret
+	MemCpyNeonSUDU144:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldr			q16, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	str			q16, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU145:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #25
+	ld1			{ v16.1d-v18.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #25
+	st1			{ v16.1d-v18.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU146:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #26
+	ld1			{ v16.1d-v18.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #26
+	st1			{ v16.1d-v18.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU147:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #27
+	ld1			{ v16.1d-v18.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #27
+	st1			{ v16.1d-v18.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU148:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #28
+	ld1			{ v16.1d-v18.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #28
+	st1			{ v16.1d-v18.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU149:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #29
+	ld1			{ v16.1d-v18.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #29
+	st1			{ v16.1d-v18.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU150:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #30
+	ld1			{ v16.1d-v18.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #30
+	st1			{ v16.1d-v18.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU151:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #31
+	ld1			{ v16.1d-v18.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #31
+	st1			{ v16.1d-v18.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU152:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ld1			{ v16.1d-v18.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	st1			{ v16.1d-v18.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU153:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #25
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #25
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU154:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #26
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #26
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU155:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #27
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #27
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU156:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #28
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #28
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU157:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #29
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #29
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU158:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #30
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #30
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU159:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #31
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #31
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU160:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU161:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldr			b18, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	str			b18, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU162:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldr			h18, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	str			h18, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU163:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ld3			{ v18.b-v20.b }[ 0 ], [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	st3			{ v18.b-v20.b }[ 0 ], [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU164:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldr			s18, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	str			s18, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU165:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	ldr			d18, [ /*SrcPt*/x1, #29 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	str			d18, [ /*DstPt*/x18, #29 ]
+	ret
+	MemCpyNeonSUDU166:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ld3			{ v18.h-v20.h }[ 0 ], [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	st3			{ v18.h-v20.h }[ 0 ], [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU167:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	ldr			d18, [ /*SrcPt*/x1, #31 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	str			d18, [ /*DstPt*/x18, #31 ]
+	ret
+	MemCpyNeonSUDU168:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldr			d18, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	str			d18, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU169:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	ldr			q18, [ /*SrcPt*/x1, #25 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	str			q18, [ /*DstPt*/x18, #25 ]
+	ret
+	MemCpyNeonSUDU170:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	ldr			q18, [ /*SrcPt*/x1, #26 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	str			q18, [ /*DstPt*/x18, #26 ]
+	ret
+	MemCpyNeonSUDU171:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	ldr			q18, [ /*SrcPt*/x1, #27 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	str			q18, [ /*DstPt*/x18, #27 ]
+	ret
+	MemCpyNeonSUDU172:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ld3			{ v18.s-v20.s }[ 0 ], [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	st3			{ v18.s-v20.s }[ 0 ], [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU173:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	ldr			q18, [ /*SrcPt*/x1, #29 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	str			q18, [ /*DstPt*/x18, #29 ]
+	ret
+	MemCpyNeonSUDU174:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	ldr			q18, [ /*SrcPt*/x1, #30 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	str			q18, [ /*DstPt*/x18, #30 ]
+	ret
+	MemCpyNeonSUDU175:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	ldr			q18, [ /*SrcPt*/x1, #31 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	str			q18, [ /*DstPt*/x18, #31 ]
+	ret
+	MemCpyNeonSUDU176:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldr			q18, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	str			q18, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU177:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #25
+	ld1			{ v18.1d-v20.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #25
+	st1			{ v18.1d-v20.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU178:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #26
+	ld1			{ v18.1d-v20.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #26
+	st1			{ v18.1d-v20.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU179:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #27
+	ld1			{ v18.1d-v20.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #27
+	st1			{ v18.1d-v20.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU180:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #28
+	ld1			{ v18.1d-v20.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #28
+	st1			{ v18.1d-v20.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU181:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #29
+	ld1			{ v18.1d-v20.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #29
+	st1			{ v18.1d-v20.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU182:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #30
+	ld1			{ v18.1d-v20.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #30
+	st1			{ v18.1d-v20.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU183:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #31
+	ld1			{ v18.1d-v20.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #31
+	st1			{ v18.1d-v20.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU184:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ld1			{ v18.1d-v20.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	st1			{ v18.1d-v20.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU185:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #25
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #25
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU186:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #26
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #26
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU187:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #27
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #27
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU188:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #28
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #28
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU189:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #29
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #29
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU190:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #30
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #30
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU191:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #31
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #31
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU192:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU193:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldr			b20, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	str			b20, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU194:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldr			h20, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	str			h20, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU195:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ld3			{ v20.b-v22.b }[ 0 ], [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	st3			{ v20.b-v22.b }[ 0 ], [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU196:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldr			s20, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	str			s20, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU197:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	ldr			d20, [ /*SrcPt*/x1, #29 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	str			d20, [ /*DstPt*/x18, #29 ]
+	ret
+	MemCpyNeonSUDU198:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ld3			{ v20.h-v22.h }[ 0 ], [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	st3			{ v20.h-v22.h }[ 0 ], [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU199:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	ldr			d20, [ /*SrcPt*/x1, #31 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	str			d20, [ /*DstPt*/x18, #31 ]
+	ret
+	MemCpyNeonSUDU200:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldr			d20, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	str			d20, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU201:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	ldr			q20, [ /*SrcPt*/x1, #25 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	str			q20, [ /*DstPt*/x18, #25 ]
+	ret
+	MemCpyNeonSUDU202:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	ldr			q20, [ /*SrcPt*/x1, #26 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	str			q20, [ /*DstPt*/x18, #26 ]
+	ret
+	MemCpyNeonSUDU203:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	ldr			q20, [ /*SrcPt*/x1, #27 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	str			q20, [ /*DstPt*/x18, #27 ]
+	ret
+	MemCpyNeonSUDU204:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ld3			{ v20.s-v22.s }[ 0 ], [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	st3			{ v20.s-v22.s }[ 0 ], [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU205:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	ldr			q20, [ /*SrcPt*/x1, #29 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	str			q20, [ /*DstPt*/x18, #29 ]
+	ret
+	MemCpyNeonSUDU206:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	ldr			q20, [ /*SrcPt*/x1, #30 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	str			q20, [ /*DstPt*/x18, #30 ]
+	ret
+	MemCpyNeonSUDU207:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	ldr			q20, [ /*SrcPt*/x1, #31 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	str			q20, [ /*DstPt*/x18, #31 ]
+	ret
+	MemCpyNeonSUDU208:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldr			q20, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	str			q20, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU209:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #25
+	ld1			{ v20.1d-v22.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #25
+	st1			{ v20.1d-v22.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU210:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #26
+	ld1			{ v20.1d-v22.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #26
+	st1			{ v20.1d-v22.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU211:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #27
+	ld1			{ v20.1d-v22.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #27
+	st1			{ v20.1d-v22.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU212:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #28
+	ld1			{ v20.1d-v22.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #28
+	st1			{ v20.1d-v22.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU213:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #29
+	ld1			{ v20.1d-v22.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #29
+	st1			{ v20.1d-v22.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU214:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #30
+	ld1			{ v20.1d-v22.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #30
+	st1			{ v20.1d-v22.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU215:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #31
+	ld1			{ v20.1d-v22.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #31
+	st1			{ v20.1d-v22.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU216:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ld1			{ v20.1d-v22.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	st1			{ v20.1d-v22.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU217:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #25
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #25
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU218:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #26
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #26
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU219:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #27
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #27
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU220:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #28
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #28
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU221:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #29
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #29
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU222:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #30
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #30
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU223:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #31
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #31
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU224:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU225:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ], #32
+	ldr			b22, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ], #32
+	str			b22, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU226:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ], #32
+	ldr			h22, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ], #32
+	str			h22, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU227:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ], #32
+	ld3			{ v22.b-v24.b }[ 0 ], [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ], #32
+	st3			{ v22.b-v24.b }[ 0 ], [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU228:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ], #32
+	ldr			s22, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ], #32
+	str			s22, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU229:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	ldr			d22, [ /*SrcPt*/x1, #29 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	str			d22, [ /*DstPt*/x18, #29 ]
+	ret
+	MemCpyNeonSUDU230:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ], #32
+	ld3			{ v22.h-v24.h }[ 0 ], [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ], #32
+	st3			{ v22.h-v24.h }[ 0 ], [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU231:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	ldr			d22, [ /*SrcPt*/x1, #31 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	str			d22, [ /*DstPt*/x18, #31 ]
+	ret
+	MemCpyNeonSUDU232:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ], #32
+	ldr			d22, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ], #32
+	str			d22, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU233:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	ldr			q22, [ /*SrcPt*/x1, #25 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	str			q22, [ /*DstPt*/x18, #25 ]
+	ret
+	MemCpyNeonSUDU234:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	ldr			q22, [ /*SrcPt*/x1, #26 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	str			q22, [ /*DstPt*/x18, #26 ]
+	ret
+	MemCpyNeonSUDU235:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	ldr			q22, [ /*SrcPt*/x1, #27 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	str			q22, [ /*DstPt*/x18, #27 ]
+	ret
+	MemCpyNeonSUDU236:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ], #32
+	ld3			{ v22.s-v24.s }[ 0 ], [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ], #32
+	st3			{ v22.s-v24.s }[ 0 ], [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU237:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	ldr			q22, [ /*SrcPt*/x1, #29 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	str			q22, [ /*DstPt*/x18, #29 ]
+	ret
+	MemCpyNeonSUDU238:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	ldr			q22, [ /*SrcPt*/x1, #30 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	str			q22, [ /*DstPt*/x18, #30 ]
+	ret
+	MemCpyNeonSUDU239:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	ldr			q22, [ /*SrcPt*/x1, #31 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	str			q22, [ /*DstPt*/x18, #31 ]
+	ret
+	MemCpyNeonSUDU240:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ], #32
+	ldr			q22, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ], #32
+	str			q22, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU241:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #25
+	ld1			{ v22.1d-v24.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #25
+	st1			{ v22.1d-v24.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU242:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #26
+	ld1			{ v22.1d-v24.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #26
+	st1			{ v22.1d-v24.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU243:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #27
+	ld1			{ v22.1d-v24.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #27
+	st1			{ v22.1d-v24.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU244:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #28
+	ld1			{ v22.1d-v24.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #28
+	st1			{ v22.1d-v24.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU245:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #29
+	ld1			{ v22.1d-v24.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #29
+	st1			{ v22.1d-v24.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU246:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #30
+	ld1			{ v22.1d-v24.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #30
+	st1			{ v22.1d-v24.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU247:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #31
+	ld1			{ v22.1d-v24.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #31
+	st1			{ v22.1d-v24.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU248:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ], #32
+	ld1			{ v22.1d-v24.1d }, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ], #32
+	st1			{ v22.1d-v24.1d }, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU249:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #25
+	ldp			q22, q23, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #25
+	stp			q22, q23, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU250:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #26
+	ldp			q22, q23, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #26
+	stp			q22, q23, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU251:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #27
+	ldp			q22, q23, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #27
+	stp			q22, q23, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU252:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #28
+	ldp			q22, q23, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #28
+	stp			q22, q23, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU253:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #29
+	ldp			q22, q23, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #29
+	stp			q22, q23, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU254:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #30
+	ldp			q22, q23, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #30
+	stp			q22, q23, [ /*DstPt*/x18 ]
+	ret
+	MemCpyNeonSUDU255:
+	ldp			q0, q1, [ /*SrcPt*/x1 ], #32
+	ldp			q2, q3, [ /*SrcPt*/x1 ], #32
+	ldp			q4, q5, [ /*SrcPt*/x1 ], #32
+	ldp			q6, q7, [ /*SrcPt*/x1 ], #32
+	ldp			q16, q17, [ /*SrcPt*/x1 ], #32
+	ldp			q18, q19, [ /*SrcPt*/x1 ], #32
+	ldp			q20, q21, [ /*SrcPt*/x1 ]
+	add			/*SrcPt*/x1, /*SrcPt*/x1, #31
+	ldp			q22, q23, [ /*SrcPt*/x1 ]
+	stp			q0, q1, [ /*DstPt*/x18 ], #32
+	stp			q2, q3, [ /*DstPt*/x18 ], #32
+	stp			q4, q5, [ /*DstPt*/x18 ], #32
+	stp			q6, q7, [ /*DstPt*/x18 ], #32
+	stp			q16, q17, [ /*DstPt*/x18 ], #32
+	stp			q18, q19, [ /*DstPt*/x18 ], #32
+	stp			q20, q21, [ /*DstPt*/x18 ]
+	add			/*DstPt*/x18, /*DstPt*/x18, #31
+	stp			q22, q23, [ /*DstPt*/x18 ]
 	ret

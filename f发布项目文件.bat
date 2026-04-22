@@ -1,32 +1,48 @@
-set Name=UniverseFastestLibrary
+for /f "tokens=*" %%i in ('type %~dp0\dµ±Ç°ÏîÄ¿Ãû³Æ.txt') do set ProjectName=%%i
 
-::ä¸è¦æ¸…ç†ä¸­é—´æ–‡ä»¶ï¼Œå¦åˆ™ç¼–è¯‘å™¨ä¼šè®¤ä¸ºè¦é‡æ–°ç¼–è¯‘ã€‚
+::Á´½ÓÍ·ÎÄ¼þ
+call :MakeFileLink %~dp0\%ProjectName%\UniverseFastestLibrary.h ..\Source\%ProjectName%\UniverseFastestLibrary.h
+call :MakeFileLink %~dp0\%ProjectName%\MemCpy.h ..\Source\%ProjectName%\MemCpy.h
+call :MakeFileLink %~dp0\%ProjectName%\MutexLock.h ..\Source\%ProjectName%\MutexLock.h
 
-::é“¾æŽ¥å¤´æ–‡ä»¶
-set SrcDir=%~dp0\Source\%Name%\UniverseFastestLibrary.h
-set DestDir=%~dp0\%Name%\UniverseFastestLibrary.h
-mklink /H %DestDir% %SrcDir%
+::Á´½ÓKeilµÄ¿âÎÄ¼þ
+mkdir %~dp0\%ProjectName%\Keil
+call :MakeDirLink %~dp0\%ProjectName%\Keil\ArmAt32 ..\..\%ProjectName%-Keil\%ProjectName%_KeilArmC_ArmAt32_Release_LNKLIB_LIB\Objects
+call :MakeDirLink %~dp0\%ProjectName%\Keil\ArmA64 ..\..\%ProjectName%-Keil\%ProjectName%_KeilArmC_ArmA64_Release_LNKLIB_LIB\Objects
 
-set SrcDir=%~dp0\Source\%Name%\MemCpy.h
-set DestDir=%~dp0\%Name%\MemCpy.h
-mklink /H %DestDir% %SrcDir%
-
-set SrcDir=%~dp0\Source\%Name%\MutexLock.h
-set DestDir=%~dp0\%Name%\MutexLock.h
-mklink /H %DestDir% %SrcDir%
-
-::é“¾æŽ¥NDKçš„åº“æ–‡ä»¶
-mklink /J %~dp0\%Name%\NDK-libs %~dp0\%Name%-NDK\libs
-
-::é“¾æŽ¥åº“æ–‡ä»¶åˆ°å„ä¸ªé¡¹ç›®
-::set SrcDir=%~dp0\%Name%\NDK-libs\*
+::¸´ÖÆ¿âÎÄ¼þµ½¸÷¸öÏîÄ¿
+::set SrcDir=%~dp0\%ProjectName%\AndroidNDK\*
 ::set DestDir=%~dp0\..\AndrdTest\app\src\main\jniLibs
 ::xcopy /E /Y /C %SrcDir% %DestDir%
 
-::set SrcDir=%~dp0\%Name%\NDK-libs\*
+::set SrcDir=%~dp0\%ProjectName%\AndroidNDK\*
 ::set DestDir=%~dp0\..\AndrdAdoVdoSftkDemo\app\src\main\jniLibs
 ::xcopy /E /Y /C %SrcDir% %DestDir%
 
-::set SrcDir=%~dp0\%Name%\NDK-libs\*
+::set SrcDir=%~dp0\%ProjectName%\AndroidNDK\*
 ::set DestDir=%~dp0\..\AndrdAdoVdoTkbkDemo\app\src\main\jniLibs
 ::xcopy /E /Y /C %SrcDir% %DestDir%
+
+::set SrcDir=%~dp0\%ProjectName%\HarmonyNDK\*
+::set DestDir=%~dp0\..\HarmonyTest\entry\libs
+::xcopy /E /Y /C %SrcDir% %DestDir%
+
+exit /b
+
+:MakeFileLink
+@echo off
+fsutil reparsepoint query %1 >nul
+if %errorlevel% equ 0 ( echo %1ÒÑÊÇÎÄ¼þÁ´½Ó & echo on & exit /b )
+del %1
+echo on
+mklink %1 %2
+exit /b
+
+:MakeDirLink
+@echo off
+fsutil reparsepoint query %1 >nul
+if %errorlevel% equ 0 ( echo %1ÒÑÊÇÎÄ¼þ¼ÐÁ´½Ó & echo on & exit /b )
+rd /q %1
+echo on
+mklink /D %1 %2
+exit /b

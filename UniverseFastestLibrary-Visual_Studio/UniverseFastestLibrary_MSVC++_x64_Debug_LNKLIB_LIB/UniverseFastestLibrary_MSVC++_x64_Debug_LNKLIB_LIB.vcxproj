@@ -54,10 +54,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\UniverseFastestLibrary\MemCpy.h" />
+    <ClInclude Include="..\..\Source\UniverseFastestLibrary\MutexLock.h" />
     <ClInclude Include="..\..\Source\UniverseFastestLibrary\UniverseFastestLibrary.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\UniverseFastestLibrary-NDK\UniverseFastestLibraryJniLoadAndUnload.cpp">
+    <ClCompile Include="..\..\Source\UniverseFastestLibrary-AndroidNDK\UniverseFastestLibraryJniLoadAndUnload.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UniverseFastestLibrary-HarmonyNDK\UniverseFastestLibraryNapiModuleRegister.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Source\UniverseFastestLibrary\UniverseFastestLibrary.cpp" />
@@ -82,6 +87,8 @@
     <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_x64.inc" />
     <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_AndroidGCC_x86.inc" />
     <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_CygwinGCC_x64.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_HarmonyNDK_ArmA64.inc" />
+    <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_HarmonyNDK_x64.inc" />
     <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_LinuxGCC_x64.inc" />
     <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_MSVC++_x64.inc" />
     <None Include="..\..\Source\UniverseFastestLibrary\AsmInc_MSVC++_x86.inc" />
@@ -100,6 +107,12 @@
     <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_CygwinGCC_x64.s">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_HarmonyNDK_ArmA64.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_HarmonyNDK_x64.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </None>
     <None Include="..\..\Source\UniverseFastestLibrary\MemCpy_LinuxGCC_x64.s">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </None>
@@ -116,6 +129,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </None>
     <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_CygwinGCC_x64.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_HarmonyNDK_ArmA64.s">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_HarmonyNDK_x64.s">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </None>
     <None Include="..\..\Source\UniverseFastestLibrary\MutexLock_LinuxGCC_x64.s">

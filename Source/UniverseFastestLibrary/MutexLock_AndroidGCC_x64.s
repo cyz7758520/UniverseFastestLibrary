@@ -8,7 +8,7 @@
 .global MutexLocked
 MutexLocked:
 
-    mov         al, 1						# 设置al为1。
+	mov         al, 1						# 设置al为1。
 	xchg        al, byte ptr [ rdi ]		# 原子交换al和互斥锁的值。
 	test        al, al						# 判断al是否为0。
 	je          MutexLockedOut				# 如果al为0，就表示成功，跳转到MutexLockedOut。
