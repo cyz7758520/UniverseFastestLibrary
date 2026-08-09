@@ -671,6 +671,7 @@ MemCpyAvx:
 	dec			r9											; 设置r9为r9-1。
 	jne			MemCpyAvxUpSADANtLarge
 
+	sfence													; 立即将无缓数据写入到内存。
 	TabJmp		MemCpyAvxUpSADATab, SzByt*8, r11
 
 	MemCpyAvxUpSADAWtLarge:									; Avx指令的从低到高地址的源始地址已对齐目的地址已对齐有缓大段复制。
@@ -37813,6 +37814,7 @@ MemCpyAvx:
 	dec			r9											; 设置r9为r9-1。
 	jne			MemCpyAvxUpSUDANtLarge
 	
+	sfence													; 立即将无缓数据写入到内存。
 	TabJmp		MemCpyAvxUpSUDATab, SzByt*8, r11
 
 	MemCpyAvxUpSUDAWtLarge:									; Avx指令的从低到高地址的源始地址未对齐目的地址已对齐有缓大段复制。
@@ -75246,6 +75248,7 @@ MemCpyAvx:
 	dec			r9											; 设置r9为r9-1。
 	jne			MemCpyAvxDownSADANtLarge
 	
+	sfence													; 立即将无缓数据写入到内存。
 	TabJmp		MemCpyAvxDownSADATab, SzByt*8, r11
 
 	MemCpyAvxDownSADAWtLarge:								; Avx指令的从高到低地址的源始地址已对齐目的地址已对齐有缓大段复制。
@@ -112388,6 +112391,7 @@ MemCpyAvx:
 	dec			r9											; 设置r9为r9-1。
 	jne			MemCpyAvxDownSUDANtLarge
 	
+	sfence													; 立即将无缓数据写入到内存。
 	TabJmp		MemCpyAvxDownSUDATab, SzByt*8, r11
 	
 	MemCpyAvxDownSUDAWtLarge:								; Avx指令的从高到低地址的源始地址未对齐目的地址已对齐有缓大段复制。
@@ -150827,6 +150831,7 @@ MemCpySse2:
 	dec			r9											; 设置r9为r9-1。
 	jne			MemCpySse2UpSADANtLarge
 	
+	sfence													; 立即将无缓数据写入到内存。
 	TabJmp		MemCpySse2UpSADATab, SzByt*8, r11
 
 	MemCpySse2UpSADAWtLarge:								; Sse2指令的从低到高地址的源始地址已对齐目的地址已对齐有缓大段复制。
@@ -219810,6 +219815,7 @@ MemCpySse2:
 	dec			r9											; 设置r9为r9-1。
 	jne			MemCpySse2UpSUDANtLarge
 	
+	sfence													; 立即将无缓数据写入到内存。
 	TabJmp		MemCpySse2UpSUDATab, SzByt*8, r11
 
 	MemCpySse2UpSUDAWtLarge:								; Sse2指令的从低到高地址的源始地址未对齐目的地址已对齐有缓大段复制。
@@ -288941,6 +288947,7 @@ MemCpySse2:
 	dec			r9											; 设置r9为r9-1。
 	jne			MemCpySse2DownSADANtLarge
 	
+	sfence													; 立即将无缓数据写入到内存。
 	TabJmp		MemCpySse2DownSADATab, SzByt*8, r11
 
 	MemCpySse2DownSADAWtLarge:								; Sse2指令的从高到低地址的源始地址已对齐目的地址已对齐有缓大段复制。
@@ -357924,6 +357931,7 @@ MemCpySse2:
 	dec			r9											; 设置r9为r9-1。
 	jne			MemCpySse2DownSUDANtLarge
 	
+	sfence													; 立即将无缓数据写入到内存。
 	TabJmp		MemCpySse2DownSUDATab, SzByt*8, r11
 
 	MemCpySse2DownSUDAWtLarge:								; Sse2指令的从高到低地址的源始地址未对齐目的地址已对齐有缓大段复制。
