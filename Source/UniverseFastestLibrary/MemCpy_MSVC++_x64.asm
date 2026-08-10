@@ -222,18 +222,32 @@ SetMemCpyFuncPt:
 	push		rbx
 	push		rcx
 	push		rdx
-
+	
+	mov			eax, 0										; 获取cpuid的最大功能号。
+	cpuid
+	cmp			eax, 7										; 检测cpuid的最大功能号是否大于等于7。
+	jb			CpuIsSuptEnhncFastStrRepMovsbStosbOut
 	mov			eax, 7
 	mov			ecx, 0
 	cpuid
-	bt			ebx, 9
+	bt			ebx, 9										; 检测cpuid的是否支持增强的快速字符串Rep Movsb/Stosb指令。
 	jnc			CpuIsSuptEnhncFastStrRepMovsbStosbOut
 	mov			g_CpuIsSuptEnhncFastStrRepMovsbStosb, 1
 	CpuIsSuptEnhncFastStrRepMovsbStosbOut:
-
+	
+	mov			eax, 0										; 获取cpuid的最大功能号。
+	cpuid
+	cmp			eax, 1										; 检测cpuid的最大功能号是否大于等于1。
+	jb			SetMemCpySse2
 	mov			eax, 1
 	cpuid
-	bt			ecx, 28
+	bt			ecx, 28										; 检测cpuid的是否支持AVX指令集。
+	jnc			SetMemCpySse2
+	bt			ecx, 27										; 检测cpuid的操作系统是否支持XSetBV/XGetBV、XSave/XRStor指令。
+	jnc			SetMemCpySse2
+	xor			ecx, ecx
+	xgetbv
+	bt			eax, 2										; 检测xcr寄存器的是否启用AVX指令集。
 	jnc			SetMemCpySse2
 	SetMemCpyAvx:
 	mov			rax, offset MemCpyAvx
